@@ -2,10 +2,13 @@
 package view;
 
 import dao.ConnectionFactory;
+import java.io.IOException;
 import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class LoginView extends javax.swing.JFrame {
     
@@ -100,7 +103,6 @@ public class LoginView extends javax.swing.JFrame {
         jLabelTitulo.setBounds(320, 60, 670, 110);
 
         jLabelBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bg_jframe.png"))); // NOI18N
-        jLabelBg.setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().add(jLabelBg);
         jLabelBg.setBounds(0, 0, 1280, 720);
 
@@ -124,7 +126,11 @@ public class LoginView extends javax.swing.JFrame {
         String pass = jPassword.getText();
         
         String query = "SELECT * FROM LOGIN WHERE USER = ? AND PASSWORD = ?";
-        conn = new ConnectionFactory().getConexao();
+        try {
+            conn = new ConnectionFactory().getConexao();
+        } catch (IOException ex) {
+            Logger.getLogger(LoginView.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         try {
             stmt = conn.prepareStatement(query);

@@ -1,5 +1,6 @@
 package dao;
 
+import java.io.IOException;
 import model.Produto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,7 +16,7 @@ private Statement st;
 private ResultSet rs;
 private ArrayList<Produto> lista = new ArrayList<Produto>();
     
-public ProdutoDao(){
+public ProdutoDao() throws IOException{
  conn = new ConnectionFactory().getConexao();
 }
 
