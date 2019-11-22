@@ -2,11 +2,29 @@ package main;
 
 import java.awt.Font;
 import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.UnsupportedLookAndFeelException;
 import view.LoginView;
 
 public class Run{ 
     public static void main(String args[]) {
         
+        try {
+            for ( LookAndFeelInfo info : UIManager.getInstalledLookAndFeels() ) {
+                if ( "Windows".equals( info.getName() ) ) {
+                    UIManager.setLookAndFeel( info.getClassName() );
+                    break;
+                }
+            }
+            } catch ( UnsupportedLookAndFeelException exc ) {
+            exc.printStackTrace();
+            } catch ( ClassNotFoundException exc ) {
+            exc.printStackTrace();
+            } catch ( InstantiationException exc ) {
+            exc.printStackTrace();
+            } catch ( IllegalAccessException exc ) {
+            exc.printStackTrace();
+}
         FontManager fontManager = new FontManager();
         Font roboto = fontManager.carregarFonte("/fonte/Roboto-Regular.ttf", Font.PLAIN, 13);
         UIManager.put("Button.font", roboto);
