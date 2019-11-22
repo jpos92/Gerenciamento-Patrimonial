@@ -25,7 +25,6 @@ public class MenuView extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(1280, 720));
         setMinimumSize(new java.awt.Dimension(1280, 720));
         setName("MenuFrame"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(1280, 720));
 
         jbtnConsumo.setText("CONSUMO");
         jbtnConsumo.setMaximumSize(new java.awt.Dimension(256, 256));

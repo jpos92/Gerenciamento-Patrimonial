@@ -45,7 +45,7 @@ public class LoginView extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jbtnLogin.setFont(new java.awt.Font("Roboto", 1, 13)); // NOI18N
+        jbtnLogin.setFont(new java.awt.Font("Roboto", 0, 13)); // NOI18N
         jbtnLogin.setText("Login");
         jbtnLogin.setMaximumSize(new java.awt.Dimension(80, 25));
         jbtnLogin.setMinimumSize(new java.awt.Dimension(80, 25));
@@ -58,7 +58,7 @@ public class LoginView extends javax.swing.JFrame {
         getContentPane().add(jbtnLogin);
         jbtnLogin.setBounds(433, 431, 80, 25);
 
-        jbtnReset.setFont(new java.awt.Font("Roboto", 1, 13)); // NOI18N
+        jbtnReset.setFont(new java.awt.Font("Roboto", 0, 13)); // NOI18N
         jbtnReset.setText("Reset");
         jbtnReset.setMaximumSize(new java.awt.Dimension(80, 25));
         jbtnReset.setMinimumSize(new java.awt.Dimension(80, 25));
@@ -71,7 +71,7 @@ public class LoginView extends javax.swing.JFrame {
         getContentPane().add(jbtnReset);
         jbtnReset.setBounds(600, 430, 80, 25);
 
-        jbtnExit.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jbtnExit.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jbtnExit.setText("Sair");
         jbtnExit.setMaximumSize(new java.awt.Dimension(80, 25));
         jbtnExit.setMinimumSize(new java.awt.Dimension(80, 25));
@@ -94,11 +94,11 @@ public class LoginView extends javax.swing.JFrame {
         getContentPane().add(jLabelPassword);
         jLabelPassword.setBounds(433, 317, 90, 29);
 
-        jtxtUsername.setFont(new java.awt.Font("Roboto", 1, 13)); // NOI18N
+        jtxtUsername.setFont(new java.awt.Font("Roboto", 0, 13)); // NOI18N
         getContentPane().add(jtxtUsername);
         jtxtUsername.setBounds(616, 266, 232, 22);
 
-        jPassword.setFont(new java.awt.Font("Roboto", 1, 13)); // NOI18N
+        jPassword.setFont(new java.awt.Font("Roboto", 0, 13)); // NOI18N
         getContentPane().add(jPassword);
         jPassword.setBounds(616, 320, 232, 22);
 
