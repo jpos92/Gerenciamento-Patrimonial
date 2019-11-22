@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/TI/Documents/NetBeansProjects/Patrimonio/src/model/Usuario.java</file>
-            <file>file:/C:/Users/TI/Documents/NetBeansProjects/Patrimonio/src/dao/ConnectionFactory.java</file>
-            <file>file:/C:/Users/TI/Documents/NetBeansProjects/Patrimonio/src/view/ProdutoView.java</file>
-            <file>file:/C:/Users/TI/Documents/NetBeansProjects/Patrimonio/src/view/LoginView.java</file>
+            <file>file:/C:/Users/TI/Documents/NetBeansProjects/Patrimonio/Gerenciamento-Patrimonial/src/view/MenuView.java</file>
+            <file>file:/C:/Users/TI/Documents/NetBeansProjects/Patrimonio/Gerenciamento-Patrimonial/src/view/DuravelView.java</file>
+            <file>file:/C:/Users/TI/Documents/NetBeansProjects/Patrimonio/Gerenciamento-Patrimonial/src/view/LoginView.java</file>
         </group>
     </open-files>
 </project-private>

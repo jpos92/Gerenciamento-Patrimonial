@@ -10,17 +10,22 @@ import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 public class LoginView extends javax.swing.JFrame {
     
     private Connection conn;
     private PreparedStatement stmt;
     private ResultSet rs;
+    public String usern;
+    public String pass;
 
     public LoginView() {
         initComponents();
         setLocationRelativeTo(null);
     }
-
+    
+    MenuView Menu = new MenuView();
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -122,8 +127,8 @@ public class LoginView extends javax.swing.JFrame {
 
     private void jbtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLoginActionPerformed
         // TODO add your handling code here:
-        String usern = jtxtUsername.getText();
-        String pass = jPassword.getText();
+        usern = jtxtUsername.getText();
+        pass = jPassword.getText();
         
         String query = "SELECT * FROM LOGIN WHERE USER = ? AND PASSWORD = ?";
         try {
@@ -144,6 +149,8 @@ public class LoginView extends javax.swing.JFrame {
                 
                 JOptionPane.showMessageDialog(null, "Usuário logado!", "(Sucesso)", 1);
                 stmt.close();
+                Menu.setVisible(true);
+                this.setVisible(false);
             }
             else {
                 
@@ -154,7 +161,6 @@ public class LoginView extends javax.swing.JFrame {
             throw new RuntimeException ("Erro 5: " + erro);
         }
     }//GEN-LAST:event_jbtnLoginActionPerformed
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabelBg;

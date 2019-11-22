@@ -2,6 +2,9 @@
 package view;
 
 import dao.ProdutoDao;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Produto;
 import table.ProdutoTableModel;
 
@@ -11,7 +14,7 @@ public class ProdutoView extends javax.swing.JFrame {
     Produto pro = new Produto();
     ProdutoDao prd = new ProdutoDao();
 
-    public ProdutoView() {
+    public ProdutoView() throws IOException {
         initComponents();
         setLocationRelativeTo(null);
         tbproduto.setAutoCreateRowSorter(true);
@@ -179,7 +182,11 @@ public class ProdutoView extends javax.swing.JFrame {
             pro.setCodigo_produto((Integer.parseInt(tfcodigo.getText())));
             prd.alterar (pro);
         }
-        tbproduto.setModel(new ProdutoTableModel(new ProdutoDao().Listartodos()));
+        try {
+            tbproduto.setModel(new ProdutoTableModel(new ProdutoDao().Listartodos()));
+        } catch (IOException ex) {
+            Logger.getLogger(ProdutoView.class.getName()).log(Level.SEVERE, null, ex);
+        }
         tfcodigo.setText("");
         tfdescricao.setText("");
         tfpreco.setText("");
@@ -194,7 +201,11 @@ public class ProdutoView extends javax.swing.JFrame {
     }//GEN-LAST:event_tbprodutoMouseClicked
 
     private void btlimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btlimparActionPerformed
-        tbproduto.setModel(new ProdutoTableModel(new ProdutoDao().Listartodos()));
+        try {
+            tbproduto.setModel(new ProdutoTableModel(new ProdutoDao().Listartodos()));
+        } catch (IOException ex) {
+            Logger.getLogger(ProdutoView.class.getName()).log(Level.SEVERE, null, ex);
+        }
         tfcodigo.setText("");
         tfdescricao.setText("");
         tfpreco.setText("");
@@ -205,7 +216,11 @@ public class ProdutoView extends javax.swing.JFrame {
         // TODO add your handling code here:
         int codigo = Integer.parseInt(tfcodigo.getText());
         prd.excluir(codigo);
-        tbproduto.setModel(new ProdutoTableModel(new ProdutoDao().Listartodos()));
+        try {
+            tbproduto.setModel(new ProdutoTableModel(new ProdutoDao().Listartodos()));
+        } catch (IOException ex) {
+            Logger.getLogger(ProdutoView.class.getName()).log(Level.SEVERE, null, ex);
+        }
         tfcodigo.setText("");
         tfdescricao.setText("");
         tfpreco.setText("");
@@ -214,7 +229,11 @@ public class ProdutoView extends javax.swing.JFrame {
 
     private void tfpesquisadescricaoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfpesquisadescricaoKeyPressed
         String pesquisa = tfpesquisadescricao.getText();
-        tbproduto.setModel(new ProdutoTableModel(new ProdutoDao().ListartodosDescricao(pesquisa)));
+        try {
+            tbproduto.setModel(new ProdutoTableModel(new ProdutoDao().ListartodosDescricao(pesquisa)));
+        } catch (IOException ex) {
+            Logger.getLogger(ProdutoView.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_tfpesquisadescricaoKeyPressed
     
