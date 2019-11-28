@@ -2,11 +2,13 @@
 package view;
 
 import dao.ConnectionFactory;
+import dao.UsuarioDao;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,10 +18,13 @@ public class LoginView extends javax.swing.JFrame {
     private Connection conn;
     private PreparedStatement stmt;
     private ResultSet rs;
+    private Statement st;
     public String usern;
     public String pass;
-
-    public LoginView() {
+    public static String usuarioLogado;
+    UsuarioDao usuario = new UsuarioDao();
+    
+    public LoginView() throws IOException { 
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -31,7 +36,6 @@ public class LoginView extends javax.swing.JFrame {
     private void initComponents() {
 
         jbtnLogin = new javax.swing.JButton();
-        jbtnReset = new javax.swing.JButton();
         jbtnExit = new javax.swing.JButton();
         jLabelUsername = new javax.swing.JLabel();
         jLabelPassword = new javax.swing.JLabel();
@@ -40,8 +44,11 @@ public class LoginView extends javax.swing.JFrame {
         jLabelTitulo = new javax.swing.JLabel();
         jLabelBg = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(640, 480));
+        setMinimumSize(new java.awt.Dimension(640, 480));
+        setName("frameLogin"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(640, 480));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -56,20 +63,7 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbtnLogin);
-        jbtnLogin.setBounds(433, 431, 80, 25);
-
-        jbtnReset.setFont(new java.awt.Font("Roboto", 0, 13)); // NOI18N
-        jbtnReset.setText("Reset");
-        jbtnReset.setMaximumSize(new java.awt.Dimension(80, 25));
-        jbtnReset.setMinimumSize(new java.awt.Dimension(80, 25));
-        jbtnReset.setPreferredSize(new java.awt.Dimension(80, 25));
-        jbtnReset.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnResetActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jbtnReset);
-        jbtnReset.setBounds(600, 430, 80, 25);
+        jbtnLogin.setBounds(440, 240, 80, 25);
 
         jbtnExit.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jbtnExit.setText("Sair");
@@ -82,34 +76,38 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbtnExit);
-        jbtnExit.setBounds(770, 430, 80, 25);
+        jbtnExit.setBounds(440, 420, 80, 25);
 
         jLabelUsername.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
         jLabelUsername.setText("Usuário:");
         getContentPane().add(jLabelUsername);
-        jLabelUsername.setBounds(433, 266, 120, 29);
+        jLabelUsername.setBounds(110, 120, 120, 29);
 
         jLabelPassword.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
         jLabelPassword.setText("Senha:");
         getContentPane().add(jLabelPassword);
-        jLabelPassword.setBounds(433, 317, 90, 29);
+        jLabelPassword.setBounds(110, 180, 90, 29);
 
         jtxtUsername.setFont(new java.awt.Font("Roboto", 0, 13)); // NOI18N
         getContentPane().add(jtxtUsername);
-        jtxtUsername.setBounds(616, 266, 232, 22);
+        jtxtUsername.setBounds(290, 120, 232, 22);
 
         jPassword.setFont(new java.awt.Font("Roboto", 0, 13)); // NOI18N
         getContentPane().add(jPassword);
-        jPassword.setBounds(616, 320, 232, 22);
+        jPassword.setBounds(290, 180, 232, 22);
 
-        jLabelTitulo.setFont(new java.awt.Font("Roboto", 1, 48)); // NOI18N
+        jLabelTitulo.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
+        jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabelTitulo.setText("Sistema de Gestão Patrimonial");
         getContentPane().add(jLabelTitulo);
-        jLabelTitulo.setBounds(320, 60, 670, 110);
+        jLabelTitulo.setBounds(0, 0, 640, 80);
 
         jLabelBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bg_jframe.png"))); // NOI18N
+        jLabelBg.setMaximumSize(new java.awt.Dimension(640, 480));
+        jLabelBg.setMinimumSize(new java.awt.Dimension(640, 480));
+        jLabelBg.setPreferredSize(new java.awt.Dimension(640, 480));
         getContentPane().add(jLabelBg);
-        jLabelBg.setBounds(0, 0, 1280, 720);
+        jLabelBg.setBounds(0, 0, 640, 480);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -119,18 +117,13 @@ public class LoginView extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jbtnExitActionPerformed
 
-    private void jbtnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnResetActionPerformed
-        // TODO add your handling code here:
-        jtxtUsername.setText(null);
-        jPassword.setText(null);
-    }//GEN-LAST:event_jbtnResetActionPerformed
-
     private void jbtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLoginActionPerformed
         // TODO add your handling code here:
         usern = jtxtUsername.getText();
         pass = jPassword.getText();
+        usuarioLogado = usuario.retornaNome(usern);
         
-        String query = "SELECT * FROM LOGIN WHERE USER = ? AND PASSWORD = ?";
+        String queryLogin = "SELECT * FROM LOGIN WHERE USER = ? AND PASSWORD = ?";
         try {
             conn = new ConnectionFactory().getConexao();
         } catch (IOException ex) {
@@ -138,7 +131,7 @@ public class LoginView extends javax.swing.JFrame {
         }
         
         try {
-            stmt = conn.prepareStatement(query);
+            stmt = conn.prepareStatement(queryLogin);
             
             stmt.setString(1, usern);
             stmt.setString(2, pass);
@@ -157,6 +150,7 @@ public class LoginView extends javax.swing.JFrame {
                  JOptionPane.showMessageDialog(null, "Credenciais inválidas!", "(Erro)", JOptionPane.ERROR_MESSAGE);
                  stmt.close();
             }
+            
         } catch(Exception erro) {
             throw new RuntimeException ("Erro 5: " + erro);
         }
@@ -170,7 +164,6 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPassword;
     private javax.swing.JButton jbtnExit;
     private javax.swing.JButton jbtnLogin;
-    private javax.swing.JButton jbtnReset;
     private javax.swing.JTextField jtxtUsername;
     // End of variables declaration//GEN-END:variables
 

@@ -1,13 +1,14 @@
 package main;
 
 import java.awt.Font;
+import java.io.IOException;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 import view.LoginView;
 
 public class Run{ 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws IOException {
         
         try {
             for ( LookAndFeelInfo info : UIManager.getInstalledLookAndFeels() ) {

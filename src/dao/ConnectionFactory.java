@@ -27,11 +27,7 @@ public class ConnectionFactory {
         hostName = prop.getProperty("prop.server.host");
         senha = prop.getProperty("prop.server.password");
         login = prop.getProperty("prop.server.login");
-        
-        System.out.println("Login = " + login);
-        System.out.println("Host = " + hostName);
-        System.out.println("Password = " + senha);
-        
+       
         try {
             return DriverManager.getConnection("jdbc:mysql://"+hostName+"/patrimonio", login, senha);
         } 
