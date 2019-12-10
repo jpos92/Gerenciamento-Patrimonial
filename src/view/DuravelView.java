@@ -1,26 +1,49 @@
 
 package view;
 
-import dao.ConnectionFactory;
+import dao.DuravelDao;
 import java.io.IOException;
-import javax.swing.JOptionPane;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Duravel;
+import table.DuravelTableModel;
 
 public class DuravelView extends javax.swing.JFrame {
     
-    private Connection conn;
-    private PreparedStatement stmt;
-    private ResultSet rs;
+    Duravel pro = new Duravel();
+    DuravelDao prd;
+    String codigo = null;
 
-    public DuravelView() {
+    public DuravelView() throws IOException {
         initComponents();
         setLocationRelativeTo(null);
-        jtxtNomeCadastro.setText(LoginView.usuarioLogado);
-        System.out.print(LoginView.usuarioLogado);
+        this.prd = new DuravelDao();
+        jtbDuraveis.setAutoCreateRowSorter(true);
+        jtbDuraveis.setModel(new DuravelTableModel(new DuravelDao().Listartodos()));
+        jtbDuraveis.getColumnModel().getColumn(0).setMinWidth(0);
+        jtbDuraveis.getColumnModel().getColumn(0).setMaxWidth(0);
+        jtbDuraveis.getColumnModel().getColumn(3).setMinWidth(0);
+        jtbDuraveis.getColumnModel().getColumn(3).setMaxWidth(0);
+        jtbDuraveis.getColumnModel().getColumn(4).setMinWidth(0);
+        jtbDuraveis.getColumnModel().getColumn(4).setMaxWidth(0);
+        jtbDuraveis.getColumnModel().getColumn(5).setMinWidth(0);
+        jtbDuraveis.getColumnModel().getColumn(5).setMaxWidth(0);
+        jtbDuraveis.getColumnModel().getColumn(6).setMinWidth(0);
+        jtbDuraveis.getColumnModel().getColumn(6).setMaxWidth(0);
+        jtbDuraveis.getColumnModel().getColumn(7).setMinWidth(0);
+        jtbDuraveis.getColumnModel().getColumn(7).setMaxWidth(0);
+        jtbDuraveis.getColumnModel().getColumn(8).setMinWidth(0);
+        jtbDuraveis.getColumnModel().getColumn(8).setMaxWidth(0);
+        jtbDuraveis.getColumnModel().getColumn(9).setMinWidth(0);
+        jtbDuraveis.getColumnModel().getColumn(9).setMaxWidth(0);
+        jtbDuraveis.getColumnModel().getColumn(11).setMinWidth(0);
+        jtbDuraveis.getColumnModel().getColumn(11).setMaxWidth(0);
+        jtbDuraveis.getColumnModel().getColumn(12).setMinWidth(0);
+        jtbDuraveis.getColumnModel().getColumn(12).setMaxWidth(0);
+        jtbDuraveis.getColumnModel().getColumn(13).setMinWidth(0);
+        jtbDuraveis.getColumnModel().getColumn(13).setMaxWidth(0);
+        jtbDuraveis.getColumnModel().getColumn(14).setMinWidth(0);
+        jtbDuraveis.getColumnModel().getColumn(14).setMaxWidth(0);
     }
     
     @SuppressWarnings("unchecked")
@@ -62,6 +85,8 @@ public class DuravelView extends javax.swing.JFrame {
         jlValorRecuperado = new javax.swing.JLabel();
         jtxtValor = new javax.swing.JFormattedTextField();
         jtxtValorRecuperado = new javax.swing.JFormattedTextField();
+        jbtnPesquisar = new javax.swing.JButton();
+        jtxtPesquisar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1280, 720));
@@ -100,6 +125,7 @@ public class DuravelView extends javax.swing.JFrame {
         });
 
         jTipoCompra.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "C", "E", "F" }));
+        jTipoCompra.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jlTipoCompra.setText("Tipo da compra:");
         jlTipoCompra.setMaximumSize(new java.awt.Dimension(31, 32));
@@ -175,7 +201,6 @@ public class DuravelView extends javax.swing.JFrame {
         jlNomeCadastro.setMinimumSize(new java.awt.Dimension(31, 32));
         jlNomeCadastro.setPreferredSize(new java.awt.Dimension(31, 32));
 
-        jtxtNomeCadastro.setEditable(false);
         jtxtNomeCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtxtNomeCadastroActionPerformed(evt);
@@ -188,16 +213,31 @@ public class DuravelView extends javax.swing.JFrame {
         jlValor.setPreferredSize(new java.awt.Dimension(31, 32));
 
         jbtnAdicionar.setText("Adicionar");
+        jbtnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnAdicionarActionPerformed(evt);
+            }
+        });
 
         jbtnExcluir.setText("Excluir");
         jbtnExcluir.setMaximumSize(new java.awt.Dimension(77, 23));
         jbtnExcluir.setMinimumSize(new java.awt.Dimension(77, 23));
         jbtnExcluir.setPreferredSize(new java.awt.Dimension(77, 23));
+        jbtnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnExcluirActionPerformed(evt);
+            }
+        });
 
         jbtnLimpar.setText("Limpar");
         jbtnLimpar.setMaximumSize(new java.awt.Dimension(77, 23));
         jbtnLimpar.setMinimumSize(new java.awt.Dimension(77, 23));
         jbtnLimpar.setPreferredSize(new java.awt.Dimension(77, 23));
+        jbtnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnLimparActionPerformed(evt);
+            }
+        });
 
         jbtnSair.setText("Sair");
         jbtnSair.setMaximumSize(new java.awt.Dimension(77, 23));
@@ -229,6 +269,11 @@ public class DuravelView extends javax.swing.JFrame {
 
             }
         ));
+        jtbDuraveis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtbDuraveisMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jtbDuraveis);
 
         jlValorRecuperado.setText("Valor do bem recuperado:");
@@ -236,13 +281,16 @@ public class DuravelView extends javax.swing.JFrame {
         jlValorRecuperado.setMinimumSize(new java.awt.Dimension(31, 32));
         jlValorRecuperado.setPreferredSize(new java.awt.Dimension(31, 32));
 
-        jtxtValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        jtxtValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
 
-        try {
-            jtxtValorRecuperado.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        jtxtValorRecuperado.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+
+        jbtnPesquisar.setText("Pesquisar");
+        jbtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnPesquisarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -317,7 +365,12 @@ public class DuravelView extends javax.swing.JFrame {
                         .addGap(50, 50, 50)
                         .addComponent(jbtnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(29, 29, 29)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jbtnPesquisar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jtxtPesquisar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -326,7 +379,7 @@ public class DuravelView extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addComponent(jLabelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -383,18 +436,20 @@ public class DuravelView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jlValor, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlValorRecuperado, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtxtValorRecuperado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtxtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlValorRecuperado, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtxtValorRecuperado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1))
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnAdicionar)
                     .addComponent(jbtnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbtnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnPesquisar)
+                    .addComponent(jtxtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(57, 57, 57))
         );
 
@@ -434,6 +489,216 @@ public class DuravelView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jbtnSairActionPerformed
 
+    private void jbtnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAdicionarActionPerformed
+        // TODO add your handling code here:
+        if (codigo ==  null) {
+            pro.setNome_bem(jtxtNome.getText());
+            pro.setNum_tombo(jtxtTombo.getText());
+            pro.setNum_nota(jtxtNota.getText());
+            pro.setData_nota(jtxtDataNota.getText());
+            pro.setTipo_compra(jTipoCompra.getSelectedItem().toString());
+            pro.setEstado_conservacao(jEstado.getSelectedItem().toString());
+            pro.setTipo_aquisicao(jTipoAquisicao.getSelectedItem().toString());
+            pro.setUnidade(jtxtUnidade.getText());
+            pro.setSubunidade(jtxtSubunidade.getText());
+            pro.setLocalizacao(jtxtLocalizacao.getText());
+            pro.setNome_cad(jtxtNomeCadastro.getText());
+            pro.setData_cad(jtxtDataCadastro.getText());
+            pro.setValor_bem(jtxtValor.getText());
+            pro.setValor_bem_rec(jtxtValorRecuperado.getText());
+            prd.inserir(pro);
+        } else {
+            pro.setNome_bem(jtxtNome.getText());
+            pro.setNum_tombo(jtxtTombo.getText());
+            pro.setNum_nota(jtxtNota.getText());
+            pro.setData_nota(jtxtDataNota.getText());
+            pro.setTipo_compra(jTipoCompra.getSelectedItem().toString());
+            pro.setEstado_conservacao(jEstado.getSelectedItem().toString());
+            pro.setTipo_aquisicao(jTipoAquisicao.getSelectedItem().toString());
+            pro.setUnidade(jtxtUnidade.getText());
+            pro.setSubunidade(jtxtSubunidade.getText());
+            pro.setLocalizacao(jtxtLocalizacao.getText());
+            pro.setNome_cad(jtxtNomeCadastro.getText());
+            pro.setData_cad(jtxtDataCadastro.getText());
+            pro.setValor_bem(jtxtValor.getText());
+            pro.setValor_bem_rec(jtxtValorRecuperado.getText());
+            pro.setCodigo(Integer.parseInt(codigo));
+            prd.alterar(pro);
+        }
+        codigo = null;
+        try {
+            jtbDuraveis.setModel(new DuravelTableModel(new DuravelDao().Listartodos()));
+            jtbDuraveis.getColumnModel().getColumn(0).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(0).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(3).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(3).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(4).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(4).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(5).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(5).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(6).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(6).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(7).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(7).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(8).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(8).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(9).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(9).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(11).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(11).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(12).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(12).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(13).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(13).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(14).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(14).setMaxWidth(0);
+        } catch (IOException ex) {
+            Logger.getLogger(DuravelView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jtxtNome.setText("");
+        jtxtTombo.setText("");
+        jtxtNota.setText("");
+        jtxtDataNota.setText("");
+        jTipoCompra.setSelectedItem("C");
+        jEstado.setSelectedItem("E");
+        jTipoAquisicao.setSelectedItem("AL");
+        jtxtUnidade.setText("");
+        jtxtSubunidade.setText("");
+        jtxtLocalizacao.setText("");
+        jtxtNomeCadastro.setText("");
+        jtxtDataCadastro.setText("");
+        jtxtValor.setText("");
+        jtxtValorRecuperado.setText("");
+    }//GEN-LAST:event_jbtnAdicionarActionPerformed
+
+    private void jtbDuraveisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtbDuraveisMouseClicked
+        // TODO add your handling code here:
+        codigo = (jtbDuraveis.getValueAt(jtbDuraveis.getSelectedRow(), DuravelTableModel.COL_CODIGO).toString());
+        jtxtNome.setText(jtbDuraveis.getValueAt(jtbDuraveis.getSelectedRow(), DuravelTableModel.COL_NOME_BEM).toString());
+        jtxtTombo.setText(jtbDuraveis.getValueAt(jtbDuraveis.getSelectedRow(), DuravelTableModel.COL_NUM_TOMBO).toString());
+        jtxtNota.setText(jtbDuraveis.getValueAt(jtbDuraveis.getSelectedRow(), DuravelTableModel.COL_NUM_NOTA).toString());
+        jtxtDataNota.setText(jtbDuraveis.getValueAt(jtbDuraveis.getSelectedRow(), DuravelTableModel.COL_DATA_NOTA).toString());
+        jTipoCompra.setName(jtbDuraveis.getValueAt(jtbDuraveis.getSelectedRow(), DuravelTableModel.COL_TIPO_COMPRA).toString());
+        jEstado.setName(jtbDuraveis.getValueAt(jtbDuraveis.getSelectedRow(), DuravelTableModel.COL_ESTADO_CONSERVACAO).toString());
+        jTipoAquisicao.setName(jtbDuraveis.getValueAt(jtbDuraveis.getSelectedRow(), DuravelTableModel.COL_TIPO_AQUISICAO).toString());
+        jtxtUnidade.setText(jtbDuraveis.getValueAt(jtbDuraveis.getSelectedRow(), DuravelTableModel.COL_UNIDADE).toString());
+        jtxtSubunidade.setText(jtbDuraveis.getValueAt(jtbDuraveis.getSelectedRow(), DuravelTableModel.COL_SUBUNIDADE).toString());
+        jtxtLocalizacao.setText(jtbDuraveis.getValueAt(jtbDuraveis.getSelectedRow(), DuravelTableModel.COL_LOCALIZACAO).toString());
+        jtxtNomeCadastro.setText(jtbDuraveis.getValueAt(jtbDuraveis.getSelectedRow(), DuravelTableModel.COL_NOME_CAD).toString());
+        jtxtDataCadastro.setText(jtbDuraveis.getValueAt(jtbDuraveis.getSelectedRow(), DuravelTableModel.COL_DATA_CAD).toString());
+        jtxtValor.setText(jtbDuraveis.getValueAt(jtbDuraveis.getSelectedRow(), DuravelTableModel.COL_VALOR_BEM).toString());
+        jtxtValorRecuperado.setText(jtbDuraveis.getValueAt(jtbDuraveis.getSelectedRow(), DuravelTableModel.COL_VALOR_BEM_REC).toString());
+        
+        
+    }//GEN-LAST:event_jtbDuraveisMouseClicked
+
+    private void jbtnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnLimparActionPerformed
+        // TODO add your handling code here:
+        codigo = null;
+        try {
+            jtbDuraveis.setModel(new DuravelTableModel(new DuravelDao().Listartodos()));
+            jtbDuraveis.getColumnModel().getColumn(0).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(0).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(3).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(3).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(4).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(4).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(5).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(5).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(6).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(6).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(7).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(7).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(8).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(8).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(9).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(9).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(11).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(11).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(12).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(12).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(13).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(13).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(14).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(14).setMaxWidth(0);
+        } catch (IOException ex) {
+            Logger.getLogger(DuravelView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jtxtNome.setText("");
+        jtxtTombo.setText("");
+        jtxtNota.setText("");
+        jtxtDataNota.setText("");
+        jTipoCompra.setSelectedItem("C");
+        jEstado.setSelectedItem("E");
+        jTipoAquisicao.setSelectedItem("AL");
+        jtxtUnidade.setText("");
+        jtxtSubunidade.setText("");
+        jtxtLocalizacao.setText("");
+        jtxtNomeCadastro.setText("");
+        jtxtDataCadastro.setText("");
+        jtxtValor.setText("");
+        jtxtValorRecuperado.setText("");
+    }//GEN-LAST:event_jbtnLimparActionPerformed
+
+    private void jbtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnExcluirActionPerformed
+        // TODO add your handling code here:
+        prd.excluir(Integer.parseInt(codigo));
+        codigo = null;
+        try {
+            jtbDuraveis.setModel(new DuravelTableModel(new DuravelDao().Listartodos()));
+        } catch (IOException ex) {
+            Logger.getLogger(DuravelView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jtxtNome.setText("");
+        jtxtTombo.setText("");
+        jtxtNota.setText("");
+        jtxtDataNota.setText("");
+        jTipoCompra.setSelectedItem("C");
+        jEstado.setSelectedItem("E");
+        jTipoAquisicao.setSelectedItem("AL");
+        jtxtUnidade.setText("");
+        jtxtSubunidade.setText("");
+        jtxtLocalizacao.setText("");
+        jtxtNomeCadastro.setText("");
+        jtxtDataCadastro.setText("");
+        jtxtValor.setText("");
+        jtxtValorRecuperado.setText("");
+    }//GEN-LAST:event_jbtnExcluirActionPerformed
+
+    private void jbtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnPesquisarActionPerformed
+        // TODO add your handling code here:
+        String nome = jtxtPesquisar.getText();
+        try {
+            jtbDuraveis.setModel(new DuravelTableModel(new DuravelDao().ListartodosNome(nome)));
+            jtbDuraveis.getColumnModel().getColumn(0).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(0).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(3).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(3).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(4).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(4).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(5).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(5).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(6).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(6).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(7).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(7).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(8).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(8).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(9).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(9).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(11).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(11).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(12).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(12).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(13).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(13).setMaxWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(14).setMinWidth(0);
+            jtbDuraveis.getColumnModel().getColumn(14).setMaxWidth(0);
+        } catch (IOException ex) {
+            Logger.getLogger(DuravelView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jbtnPesquisarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox jEstado;
     private javax.swing.JLabel jLabelTitulo;
@@ -443,6 +708,7 @@ public class DuravelView extends javax.swing.JFrame {
     private javax.swing.JButton jbtnAdicionar;
     private javax.swing.JButton jbtnExcluir;
     private javax.swing.JButton jbtnLimpar;
+    private javax.swing.JButton jbtnPesquisar;
     private javax.swing.JButton jbtnSair;
     private javax.swing.JLabel jlDataCadastro;
     private javax.swing.JLabel jlDataNota;
@@ -465,6 +731,7 @@ public class DuravelView extends javax.swing.JFrame {
     private javax.swing.JTextField jtxtNome;
     private javax.swing.JTextField jtxtNomeCadastro;
     private javax.swing.JTextField jtxtNota;
+    private javax.swing.JTextField jtxtPesquisar;
     private javax.swing.JTextField jtxtSubunidade;
     private javax.swing.JTextField jtxtTombo;
     private javax.swing.JTextField jtxtUnidade;

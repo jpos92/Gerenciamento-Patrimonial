@@ -3,11 +3,13 @@ package view;
 
 import dao.ConnectionFactory;
 import dao.UsuarioDao;
+import java.awt.HeadlessException;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,7 +46,7 @@ public class LoginView extends javax.swing.JFrame {
         jLabelTitulo = new javax.swing.JLabel();
         jLabelBg = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(640, 480));
         setMinimumSize(new java.awt.Dimension(640, 480));
         setName("frameLogin"); // NOI18N
@@ -103,9 +105,6 @@ public class LoginView extends javax.swing.JFrame {
         jLabelTitulo.setBounds(0, 0, 640, 80);
 
         jLabelBg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/bg_jframe.png"))); // NOI18N
-        jLabelBg.setMaximumSize(new java.awt.Dimension(640, 480));
-        jLabelBg.setMinimumSize(new java.awt.Dimension(640, 480));
-        jLabelBg.setPreferredSize(new java.awt.Dimension(640, 480));
         getContentPane().add(jLabelBg);
         jLabelBg.setBounds(0, 0, 640, 480);
 
@@ -143,7 +142,7 @@ public class LoginView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Usuário logado!", "(Sucesso)", 1);
                 stmt.close();
                 Menu.setVisible(true);
-                this.setVisible(false);
+                dispose();
             }
             else {
                 
@@ -151,7 +150,7 @@ public class LoginView extends javax.swing.JFrame {
                  stmt.close();
             }
             
-        } catch(Exception erro) {
+        } catch(SQLException | HeadlessException erro) {
             throw new RuntimeException ("Erro 5: " + erro);
         }
     }//GEN-LAST:event_jbtnLoginActionPerformed

@@ -1,17 +1,23 @@
 
 package view;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author TI
  */
 public class MenuView extends javax.swing.JFrame {
 
-    public MenuView() {
+    public MenuView() throws IOException {
+        this.duravel = new DuravelView();
         initComponents();
     }
     
-    DuravelView Duravel = new DuravelView();
+    DuravelView duravel;
+    ConsumoView consumo = new ConsumoView();
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -27,7 +33,6 @@ public class MenuView extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(640, 480));
         setMinimumSize(new java.awt.Dimension(640, 480));
         setName("MenuFrame"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(640, 480));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -41,6 +46,11 @@ public class MenuView extends javax.swing.JFrame {
         jbtnConsumo.setMaximumSize(new java.awt.Dimension(128, 128));
         jbtnConsumo.setMinimumSize(new java.awt.Dimension(128, 128));
         jbtnConsumo.setPreferredSize(new java.awt.Dimension(128, 128));
+        jbtnConsumo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnConsumoActionPerformed(evt);
+            }
+        });
 
         jbtnDuravel.setText("DURÁVEL");
         jbtnDuravel.setMaximumSize(new java.awt.Dimension(128, 128));
@@ -110,7 +120,7 @@ public class MenuView extends javax.swing.JFrame {
 
     private void jbtnDuravelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDuravelActionPerformed
         // TODO add your handling code here:
-         Duravel.setVisible(true);
+         duravel.setVisible(true);
     }//GEN-LAST:event_jbtnDuravelActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -120,7 +130,6 @@ public class MenuView extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         jlUsuario.setText(LoginView.usuarioLogado);
-        System.out.print(LoginView.usuarioLogado);
     }//GEN-LAST:event_formWindowOpened
 
     private void jbtnTrocarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnTrocarUsuarioActionPerformed
@@ -129,8 +138,13 @@ public class MenuView extends javax.swing.JFrame {
 
     private void jbtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSairActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
+        dispose();
     }//GEN-LAST:event_jbtnSairActionPerformed
+
+    private void jbtnConsumoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnConsumoActionPerformed
+        // TODO add your handling code here:
+        consumo.setVisible(true);
+    }//GEN-LAST:event_jbtnConsumoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -140,7 +154,11 @@ public class MenuView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuView().setVisible(true);
+                try {
+                    new MenuView().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(MenuView.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
