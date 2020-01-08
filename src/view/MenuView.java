@@ -26,7 +26,6 @@ public class MenuView extends javax.swing.JFrame {
         jbtnConsumo = new javax.swing.JButton();
         jbtnDuravel = new javax.swing.JButton();
         jlUsuario = new javax.swing.JLabel();
-        jbtnTrocarUsuario = new javax.swing.JButton();
         jbtnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -62,13 +61,6 @@ public class MenuView extends javax.swing.JFrame {
             }
         });
 
-        jbtnTrocarUsuario.setText("Trocar Usuário");
-        jbtnTrocarUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnTrocarUsuarioActionPerformed(evt);
-            }
-        });
-
         jbtnSair.setText("Sair");
         jbtnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,8 +75,6 @@ public class MenuView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addComponent(jlUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbtnTrocarUsuario)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(136, Short.MAX_VALUE)
@@ -102,9 +92,7 @@ public class MenuView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtnTrocarUsuario))
+                .addComponent(jlUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnDuravel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -132,13 +120,9 @@ public class MenuView extends javax.swing.JFrame {
         jlUsuario.setText(LoginView.usuarioLogado);
     }//GEN-LAST:event_formWindowOpened
 
-    private void jbtnTrocarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnTrocarUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbtnTrocarUsuarioActionPerformed
-
     private void jbtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSairActionPerformed
         // TODO add your handling code here:
-        dispose();
+        System.exit(0);
     }//GEN-LAST:event_jbtnSairActionPerformed
 
     private void jbtnConsumoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnConsumoActionPerformed
@@ -149,25 +133,11 @@ public class MenuView extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new MenuView().setVisible(true);
-                } catch (IOException ex) {
-                    Logger.getLogger(MenuView.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbtnConsumo;
     private javax.swing.JButton jbtnDuravel;
     private javax.swing.JButton jbtnSair;
-    private javax.swing.JButton jbtnTrocarUsuario;
     private javax.swing.JLabel jlUsuario;
     // End of variables declaration//GEN-END:variables
 }

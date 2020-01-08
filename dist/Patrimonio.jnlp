@@ -8,10 +8,10 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Patrimonio.jar" size="1309061" download="eager" />
+    <jar href="Patrimonio.jar" size="1317263" download="eager" />
     <jar href="lib\mysql-connector-java-5.1.23-bin.jar" size="834126" download="eager" />
   </resources>
-  <application-desc main-class="main.Run"  name="Patrimonio" >
+  <application-desc main-class="view.LoginView"  name="Patrimonio" >
   </application-desc>
   <update check="always"/>
 </jnlp>

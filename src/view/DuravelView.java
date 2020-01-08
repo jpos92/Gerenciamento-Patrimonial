@@ -77,7 +77,6 @@ public class DuravelView extends javax.swing.JFrame {
         jbtnAdicionar = new javax.swing.JButton();
         jbtnExcluir = new javax.swing.JButton();
         jbtnLimpar = new javax.swing.JButton();
-        jbtnSair = new javax.swing.JButton();
         jtxtDataNota = new javax.swing.JFormattedTextField();
         jtxtDataCadastro = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -239,16 +238,6 @@ public class DuravelView extends javax.swing.JFrame {
             }
         });
 
-        jbtnSair.setText("Sair");
-        jbtnSair.setMaximumSize(new java.awt.Dimension(77, 23));
-        jbtnSair.setMinimumSize(new java.awt.Dimension(77, 23));
-        jbtnSair.setPreferredSize(new java.awt.Dimension(77, 23));
-        jbtnSair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnSairActionPerformed(evt);
-            }
-        });
-
         try {
             jtxtDataNota.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
@@ -361,9 +350,7 @@ public class DuravelView extends javax.swing.JFrame {
                         .addGap(50, 50, 50)
                         .addComponent(jbtnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
-                        .addComponent(jbtnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(jbtnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jbtnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -447,7 +434,6 @@ public class DuravelView extends javax.swing.JFrame {
                     .addComponent(jbtnAdicionar)
                     .addComponent(jbtnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtnSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtnPesquisar)
                     .addComponent(jtxtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(57, 57, 57))
@@ -484,10 +470,6 @@ public class DuravelView extends javax.swing.JFrame {
     private void jtxtNomeCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtNomeCadastroActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtxtNomeCadastroActionPerformed
-
-    private void jbtnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSairActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbtnSairActionPerformed
 
     private void jbtnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAdicionarActionPerformed
         // TODO add your handling code here:
@@ -709,7 +691,6 @@ public class DuravelView extends javax.swing.JFrame {
     private javax.swing.JButton jbtnExcluir;
     private javax.swing.JButton jbtnLimpar;
     private javax.swing.JButton jbtnPesquisar;
-    private javax.swing.JButton jbtnSair;
     private javax.swing.JLabel jlDataCadastro;
     private javax.swing.JLabel jlDataNota;
     private javax.swing.JLabel jlEstadoCon;

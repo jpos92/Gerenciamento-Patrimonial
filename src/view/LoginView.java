@@ -14,7 +14,6 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public class LoginView extends javax.swing.JFrame {
     
     private Connection conn;
@@ -46,7 +45,7 @@ public class LoginView extends javax.swing.JFrame {
         jLabelTitulo = new javax.swing.JLabel();
         jLabelBg = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(640, 480));
         setMinimumSize(new java.awt.Dimension(640, 480));
         setName("frameLogin"); // NOI18N
@@ -154,6 +153,20 @@ public class LoginView extends javax.swing.JFrame {
             throw new RuntimeException ("Erro 5: " + erro);
         }
     }//GEN-LAST:event_jbtnLoginActionPerformed
+
+    public static void main(String args[]) {
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    new LoginView().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(MenuView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabelBg;
